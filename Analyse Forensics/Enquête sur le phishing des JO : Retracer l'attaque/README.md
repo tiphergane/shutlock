@@ -86,7 +86,7 @@ Cache   FileObject      FileName        Result
 DataSectionObject       0xa704519a3db0  Microsoft-Windows-PowerShell%4Operational.evtx  file.0xa704519a3db0.0xa7044ea12090.DataSectionObject.Microsoft-Windows-PowerShell%4Operational.evtx.dat
 SharedCacheMap  0xa704519a3db0  Microsoft-Windows-PowerShell%4Operational.evtx  file.0xa704519a3db0.0xa7044e4f5260.SharedCacheMap.Microsoft-Windows-PowerShell%4Operational.evtx.vacb
 ```
-L'information dont nous avons besoin se situe dans le fichier qui se termine par vacb, un petit passage par extx_dump pour rendre le fichier lisible, et nous trouvons le script.
+L'information dont nous avons besoin se situe dans le fichier qui se termine par vacb, un petit passage par evtx_dump pour rendre le fichier lisible, et nous trouvons le script.
 ```json
 {
   "Event": {
