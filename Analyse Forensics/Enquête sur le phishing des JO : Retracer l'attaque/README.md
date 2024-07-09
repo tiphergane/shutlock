@@ -199,3 +199,14 @@ Voilà, nous avons désormais la totalité des informations pour créer le flag
 SHLK{Tirage_au_sort_pour_gagner_des_places_aux_Jeux_Olympiques_de_Paris_2024.pdf.lnk-IGotYourFileInfo-GetFilesInfo.ps1}
 ```
 
+### Méthode 2 on industrialise un peu tout ça (aka on fait chauffer la tronçoneuse préparée hayabusa)
+
+La méthode avec volatility est bien, mais elle est fastidieuse, on doit convertir nos evtx en json, quand on ne sais pas où chercher, cela peut prendre du temps, et s'il existait une alternative ?
+
+Il existe deux outils pour cela, [Chainsaw](https://github.com/WithSecureLabs/chainsaw) et [Hayabusa](https://github.com/Yamato-Security/hayabusa). Ils permetent de parser les logs EVTX sans conversion préalable, et permettent d'autres action Uber cool.
+
+Nous allons utiliser Hayabusa et son options "search". La team a signée son méfait dans le notepad, nous allons pouvoir chercher le mot "HAMOR" dans les logs.
+
+Cette partie se fait une fois que tout les logs ont été extrait et renommé en .evtx
+
+![retour Hayabusa](./1_RESOLU/hayabusa.png)
