@@ -1,4 +1,4 @@
-# Enquête sur le phishing des JO : Retracer l'attaque
+# Extractor 
 
 * type: Web
 * points : 500
