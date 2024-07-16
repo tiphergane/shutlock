@@ -16,4 +16,4 @@ Format du flag: SHLK{[a-zA-Z0-9_]}
 http://challenges.shutlock.fr:50000
 
 ### Exploit en action
-[![asciicast](https://asciinema.org/a/sOaw7QDRyZ2c6KCPOsWx0WNtG.svg)](https://asciinema.org/a/sOaw7QDRyZ2c6KCPOsWx0WNtG)
+[![asciicast](https://asciinema.org/a/fmbzkYl2oU2kRNr4LAs7Ee8pp.svg)](https://asciinema.org/a/fmbzkYl2oU2kRNr4LAs7Ee8pp)
