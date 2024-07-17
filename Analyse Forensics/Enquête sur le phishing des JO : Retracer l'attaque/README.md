@@ -402,4 +402,60 @@ Il nous reste plus qu'à mettre les fichiers en .shutlock dans le repertoire enc
 
 Désormais, nous que nous avons récupéré les documents chiffrés de l'utilisatrice, nous allons pouvoir extraire les données … OU PAS ! L'archive est chiffrée ! 
 
+### À la recherche du mot de passe perdu
 
+Il est temps de mettre notre plus joli chapeau, de prendre notre fouet de d'aller faire de l'archéologie dans ce que nous avons pour trouver ce mot de passe.
+
+Mes premières assomptions sont :
+
+* dans la mémoire du presse-papier
+* dans un fichier kdbx (si vault keepass)
+* dans un fichier excel/texte/n'importe où un utilisateur pourrait le stocker
+
+Pour la mémoire, avec volatility3 nous avons perdu la capacité de faire comme avec volatility2, il faudra chercher autrement. Pour commencer, on peut chercher dans windows.cmdline. Mais on ne trouvera rien. 
+
+On peux aussi chercher  dans les fichiers présent comme nous avons fait pour les kdbx, et checher des extensions "classique" comme *kdbx,xlsx,docx* … Mais encore une fois, c'est raté.
+
+Après plus de 48h de blocages et d'idée plus où moins bonnes, la solution c'est présentée à moi en cherchant une base de donnée pour retrouver le presse-papier.
+
+Dans les fichiers que nous avons, il y a un répertoire avec les stickynotes, pour ceux qui ne connaissent pas, c'est la version numérique des bons vieux post-it, et pour l'avoir vécu en vrai dans une entreprise, les mots de passes sont souvent stocké dedans, et une chance pour nous, c'est au format sqlite.
+
+Notre cible se trouve ici
+```FileSystem/AppData/Local/Packages/Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe```
+
+C'est parti pour la recherche
+
+```shell
+sqlite3 FileSystem/AppData/Local/Packages/Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe/LocalState/plum.sqlite '.tables' 
+Insight         Note            StrokeMetadata  Tag             User          
+Media           Stroke          SyncState       UpgradedNote  
+```
+
+On trouve "Note" dans la liste des tables, nous allons y faire un tour pour vérifier ce qu'il y a dedans:
+
+```shell
+sqlite3 FileSystem/AppData/Local/Packages/Microsoft.MicrosoftStickyNotes_8wekyb3d8bbwe/LocalState/plum.sqlite 'select * from Note;'
+
+\id=1f0391ce-61cd-4649-af89-3814161c7556 pwd importante recherche: s3cr3t_r3ch3rch3_pwd_!|ManagedPosition=|0|0||Yellow|0||||||0||d258c4ba-5e6a-46f7-a389-b5b44588db04|b313c38c-0b02-4c64-b989-5e7734d8454e|638532167531094865||638545650009984169
+```
+
+Super, nous avons le mot de passe de l'archive, nous pouvons désormais extraire les fichiers.
+
+```s3cr3t_r3ch3rch3_pwd_!```
+
+Une fois archiver, nous arrivons sur deux fichiers, un doc et un jpg. Dans le doc, rien de très utile dans le texte, nous allons analyser le jpg à la recherche de stego
+
+```shell
+StegSeek 0.6 - https://github.com/RickdeJager/StegSeek
+
+[i] Found passphrase: ""
+[i] Original filename: "flag.txt".
+[i] Extracting to "chiffrement.jpeg.out".
+
+```
+
+Tiens, il a trouvé un fichier flag.txt, il l'a ressorti en chiffrement.jpeg.out, c'est parti pour regarder ce qu'il contient.
+
+```
+SHLK{4uri3z-v0us_cl1qu3r}
+```
