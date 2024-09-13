@@ -11,6 +11,7 @@
 
 ### Synopsis
 
+```
 Mike O'Soft a été averti d'une campagne de phishing par le groupe THE HAMOR. Une des personnes ayant reçu le mail de phishing en question, s'est faite piegée.
 
 Vous avez pour mission de mener l'enquête. Heureusement pour vous, les équipes du ministère ont réalisé un dump mémoire sur la machine. Dans la suite de votre enquête, un dump réseau vous sera confié.
@@ -34,6 +35,7 @@ Exemple 1 - File : ctf\shutlock.test
 3 - script : ThisIsTheScript.sh
 
 SHLK{shutlock.test-ScheduleTaskName-ThisIsTheScript.sh}
+```
 
 ### First encounter
 
